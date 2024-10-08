@@ -55,27 +55,6 @@ def get_random_cafe():
         result = db.session.execute(db.select(Cafe))
         all_cafes = result.scalars().all()
     random_cafe = random.choice(all_cafes)
-    # object into json --->serialization
-
-    # here cafe is keyword argument and its value
-    # return jsonify(cafe={
-    #     # Omit the id from the response
-    #     # "id": random_cafe.id,
-    #     "name": random_cafe.name,
-    #     "map_url": random_cafe.map_url,
-    #     "img_url": random_cafe.img_url,
-    #     "location": random_cafe.location,
-    #
-    #     # Put some properties in a sub-category
-    #     "amenities": {
-    #         "seats": random_cafe.seats,
-    #         "has_toilet": random_cafe.has_toilet,
-    #         "has_wifi": random_cafe.has_wifi,
-    #         "has_sockets": random_cafe.has_sockets,
-    #         "can_take_calls": random_cafe.can_take_calls,
-    #         "coffee_price": random_cafe.coffee_price,
-    #     }
-    # })
     random_cafe_dic = random_cafe.to_dict()
     return jsonify(cafe=random_cafe_dic)
 
@@ -143,14 +122,6 @@ def delete_cafe(id):
         return jsonify(response={"success":"cafe is removed from database sucessfully"}),200
     else:
         return jsonify(error={"Not found":"cafe with given id is not found in database"}),404
-
-# HTTP GET - Read Record
-
-# HTTP POST - Create Record
-
-# HTTP PUT/PATCH - Update Record
-
-# HTTP DELETE - Delete Record
 
 
 if __name__ == '__main__':
